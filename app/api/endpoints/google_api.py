@@ -5,7 +5,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_async_session
 from app.core.google_client import get_service
 from app.core.user import current_superuser
-
 from app.crud.charityproject import charity_project_crud
 from app.services.google_api import (
     set_user_permissions, spreadsheets_create, spreadsheets_update_value)
