@@ -30,9 +30,9 @@ def calculate_invested_amount(obj_in, obj):
 
 
 async def investing(
+        session: AsyncSession,
         obj_in: Type[BothModel],
         model: Type[BothModel],
-        session: AsyncSession,
 ) -> None:
     open_objs = await session.execute(select(model).where(
         model.fully_invested == 0
