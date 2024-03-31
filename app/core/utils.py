@@ -5,6 +5,7 @@ from app.crud.charityproject import charity_project_crud
 
 
 async def check_name_duplicate(
+        
         project_name: str,
         session: AsyncSession,
 ) -> None:

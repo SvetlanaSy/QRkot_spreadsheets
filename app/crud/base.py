@@ -33,8 +33,8 @@ class CRUDBase:
 
     async def create(
             self,
-            obj_in,
             session: AsyncSession,
+            obj_in,
             user: Optional[User] = None
     ):
         obj_in_data = obj_in.dict()

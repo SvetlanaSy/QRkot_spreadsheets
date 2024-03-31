@@ -7,7 +7,7 @@ from app.core.user import current_superuser
 from app.crud.charityproject import charity_project_crud
 from app.schemas.charityproject import (
     CharityProjectCreate, CharityProjectDB, CharityProjectUpdate)
-from app.services.crud_services import CRUDService
+from app.services.crud_services import PreCRUDServices
 
 
 router = APIRouter()
@@ -31,7 +31,7 @@ async def create_charity_project(
         session: AsyncSession = Depends(get_async_session)
 ):
     """Только для суперюзеров."""
-    return await CRUDService.create_full_charity_project(session, charity_project)
+    return await PreCRUDServices.create_full_charity_project(session, charity_project)
 
 
 @router.patch(
@@ -47,7 +47,7 @@ async def update_charity_project(
 ):
     """Только для суперюзеров."""
     project = await get_project_or_404(project_id, session)
-    return await CRUDService.update_partial_charity_project(session, project, obj_in)
+    return await PreCRUDServices.update_partial_charity_project(session, project, obj_in)
 
 
 @router.delete(
@@ -61,4 +61,4 @@ async def delete_charity_project(
 ):
     """Только для суперюзеров."""
     project = await get_project_or_404(project_id, session)
-    return await CRUDService.remove_charity_project(session, project)
+    return await PreCRUDServices.remove_charity_project(session, project)
