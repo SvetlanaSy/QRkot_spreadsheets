@@ -6,7 +6,7 @@ from app.core.user import current_user, current_superuser
 from app.crud.donation import donation_crud
 from app.models import User
 from app.schemas.donation import DonationBase, DonationCreate, DonationDB
-from app.services.crud_services import PreCRUDServices
+from app.services.crud_services import InvestmentManager
 
 
 router = APIRouter()
@@ -32,7 +32,7 @@ async def create_donation(
         session: AsyncSession = Depends(get_async_session),
         user: User = Depends(current_user),
 ):
-    return await PreCRUDServices.create_full_donation(session, donation, user)
+    return await InvestmentManager.create_full_donation(session, donation, user)
 
 
 @router.get('/my',

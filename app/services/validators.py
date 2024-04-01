@@ -4,7 +4,7 @@ from app.core.constants import DEFAULT_AMOUNT
 from app.models import CharityProject
 
 
-def check_charity_project_before_edit(
+def check_charity_project_fully_invested(
         project: CharityProject
 ) -> None:
     if project and project.fully_invested:
@@ -17,7 +17,7 @@ def check_charity_project_before_edit(
 def check_charity_project_before_delete(
         project: CharityProject
 ) -> None:
-    if project.fully_invested is True:
+    if project.fully_invested:
         raise HTTPException(
             status_code=400,
             detail='В проект были внесены средства, не подлежит удалению!'
