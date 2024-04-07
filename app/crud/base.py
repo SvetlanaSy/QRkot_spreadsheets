@@ -48,9 +48,9 @@ class CRUDBase:
 
     async def update(
             self,
+            session: AsyncSession,
             db_obj,
             obj_in,
-            session: AsyncSession,
     ):
         obj_data = jsonable_encoder(db_obj)
         update_data = obj_in.dict(exclude_unset=True)
@@ -65,8 +65,8 @@ class CRUDBase:
 
     async def remove(
             self,
-            db_obj,
             session: AsyncSession,
+            db_obj,
     ):
         await session.delete(db_obj)
         await session.commit()

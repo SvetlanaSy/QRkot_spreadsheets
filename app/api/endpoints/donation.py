@@ -32,7 +32,8 @@ async def create_donation(
         session: AsyncSession = Depends(get_async_session),
         user: User = Depends(current_user),
 ):
-    return await InvestmentManager.create_full_donation(session, donation, user)
+    manager = InvestmentManager(session)
+    return await manager.create_full_donation(donation, user)
 
 
 @router.get('/my',

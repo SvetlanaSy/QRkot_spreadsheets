@@ -1,8 +1,10 @@
+from fastapi import APIRouter, Depends
 from typing import Optional
 
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.db import get_async_session
 from app.crud.base import CRUDBase
 from app.models.charity_project import CharityProject
 
@@ -12,7 +14,7 @@ class CRUDCharityProject(CRUDBase):
     async def get_project_id_by_name(
             self,
             project_name: str,
-            session: AsyncSession,
+            session: AsyncSession = Depends(get_async_session),
     ) -> Optional[int]:
         project_id = await session.execute(
             select(CharityProject.id).where(

@@ -31,7 +31,8 @@ async def create_charity_project(
         session: AsyncSession = Depends(get_async_session)
 ):
     """Только для суперюзеров."""
-    return await InvestmentManager.create_full_charity_project(session, charity_project)
+    manager = InvestmentManager(session)
+    return await manager.create_full_charity_project(charity_project)
 
 
 @router.patch(
@@ -47,7 +48,8 @@ async def update_charity_project(
 ):
     """Только для суперюзеров."""
     project = await get_project_or_404(project_id, session)
-    return await InvestmentManager.update_partial_charity_project(session, project, obj_in)
+    manager = InvestmentManager(session)
+    return await manager.update_partial_charity_project(project, obj_in)
 
 
 @router.delete(
@@ -61,4 +63,5 @@ async def delete_charity_project(
 ):
     """Только для суперюзеров."""
     project = await get_project_or_404(project_id, session)
-    return await InvestmentManager.remove_charity_project(session, project)
+    manager = InvestmentManager(session)
+    return await manager.remove_charity_project(project)
