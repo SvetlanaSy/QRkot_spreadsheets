@@ -1,12 +1,10 @@
 from datetime import datetime
 from typing import Type
 
-from fastapi import HTTPException, Depends
+from fastapi import HTTPException
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.constants import DEFAULT_AMOUNT
-from app.core.db import get_async_session
 from app.crud.charityproject import charity_project_crud
 from app.crud.donation import donation_crud
 from app.models import Donation, CharityProject
@@ -15,7 +13,7 @@ from app.models.base import BothModel
 
 class InvestmentManager:
 
-    def __init__(self, session: AsyncSession = Depends(get_async_session)):
+    def __init__(self, session):
         self.session = session
 
     def _close_obj(self, obj: Type[BothModel]) -> BothModel:
